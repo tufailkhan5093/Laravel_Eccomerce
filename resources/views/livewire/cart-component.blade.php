@@ -10,7 +10,7 @@
             </ul>
         </div>
         <div class=" main-content-area">
-
+            @if(Cart::instance('cart')->count() > 0)
             <div class="wrap-iten-in-cart">
                
                
@@ -62,21 +62,63 @@
                 <div class="order-summary">
                     <h4 class="title-box">Order Summary</h4>
                     <p class="summary-info"><span class="title">Subtotal</span><b class="index">${{Cart::instance('cart')->subtotal()}}</b></p>
+                    @if(Session::has('coupon'))
+                    <p class="summary-info"><span class="title">Discount {{Session::get('coupon')['code']}} </span><a href="" wire:click.prevent="removeCoupon()"><i class="fa fa-times text-danger"></i></a><b class="index">${{$discount}}</b></p>
+                    <p class="summary-info"><span class="title">Tax ({{config('cart.tax')}}%)</span><b class="index">${{$taxAfterDiscount}}</b></p>
+                    <p class="summary-info"><span class="title">Sub Total with Discount</span><b class="index">${{$subtotalAfterDiscount}}</b></p>
+                    <p class="summary-info total-info "><span class="title">Total</span><b class="index">${{$totalAfterDiscount}}</b></p>
+                    
+                    
+                    @else 
                     <p class="summary-info"><span class="title">Tax</span><b class="index">{{Cart::instance('cart')->tax()}}</b></p>
                     <p class="summary-info total-info "><span class="title">Total</span><b class="index">${{Cart::instance('cart')->total()}}</b></p>
+                    @endif
+                   
                 </div>
+
+                
                 <div class="checkout-info">
+                    @if(!Session::has('coupon'))
                     <label class="checkbox-field">
-                        <input class="frm-input " name="have-code" id="have-code" value="" type="checkbox"><span>I have promo code</span>
+                        <input class="frm-input " name="have-code" id="have-code" value="1" type="checkbox" wire:model="haveCouponCode"><span>I have Coupon code</span>
                     </label>
-                    <a class="btn btn-checkout" href="checkout.html">Check out</a>
-                    <a class="link-to-shop" href="shop.html">Continue Shopping<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+
+                    @if($haveCouponCode==1)
+                    <div class="summary-item">
+                    <form wire:submit.prevent="applyCoupon()">
+                        <h4>Coupon Code</h4>
+                        @if(Session::has('coupon_message'))
+                            <div class="alert alert-danger">{{Session::get('coupon_message')}}</div>
+                        @endif
+                        <input wire:model="couponCode" class="form-control" name="coupon-code" style="width:300px"><br>
+                        <button class="btn btn-info" type="submit">Apply</button>
+                    </form>
+                    </div>
+                    @endif
+
+                    @endif
+                    <a wire:click.prevent="checkout()" class="btn btn-checkout" href="checkout.html">Check out</a>
+                    <a class="link-to-shop" href="/shop">Continue Shopping<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                    
+
+
+                    
                 </div>
+              
                 <div class="update-clear">
                     <a class="btn btn-clear" href="#" wire:click.prevent="destroyAll()">Clear Shopping Cart</a>
                     <a class="btn btn-update" href="#">Update Shopping Cart</a>
                 </div>
             </div>
+
+            @else 
+            <div class="text-center" style="padding: 30px 0">
+            <h1>Your Cart is empty</h1>
+            <p>Add items to Cart</p>
+            <a href="/shop" class="btn btn-info">Shop Now</a>
+            </div>
+
+            @endif
 
             <div class="wrap-show-advance-info-box style-1 box-in-site">
                 <h3 class="title-box">Most Viewed Products</h3>

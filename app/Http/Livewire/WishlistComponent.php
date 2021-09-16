@@ -19,6 +19,8 @@ class WishlistComponent extends Component
         }
     }
 
+  
+
     public function movetoCart($rowId)
     {
         $item=Cart::instance('wishlist')->get($rowId);

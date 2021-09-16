@@ -2,12 +2,21 @@
 
     <div class="container">
 
+        <a class="btn btn-warning" href="" wire:click.prevent="msg()">Click me</a>
+        @if(Session::has('message'))
+        <div class="alert alert-success">
+                <strong>{{Session::get('message')}}</strong>
+        </div>
+        @endif
+
         <div class="wrap-breadcrumb">
             <ul>
                 <li class="item-link"><a href="#" class="link">home</a></li>
                 <li class="item-link"><span>WishList</span></li>
             </ul>
         </div>
+
+      
 
 
         <div class="row">
