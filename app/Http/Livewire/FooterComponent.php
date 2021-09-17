@@ -8,7 +8,7 @@ class FooterComponent extends Component
 {
     public function render()
     {
-        $setting=Setting::all();
+        $setting=Setting::find(1);
         return view('livewire.footer-component',['settings'=>$setting])->layout('layouts.base');
     }
 }

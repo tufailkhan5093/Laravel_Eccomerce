@@ -22,6 +22,7 @@ class AddProductComponent extends Component
     public $featured;
     public $quantity;
     public $image;
+    public $images;
     public $category_id;
 
 
@@ -53,6 +54,19 @@ class AddProductComponent extends Component
         $imageName=Carbon::now()->timestamp.'.'.$this->image->extension();
         $this->image->storeAs('products',$imageName);
         $product->image=$imageName;
+
+        if($this->images)
+        {
+            $imagesName='';
+            foreach($this->images as $key=>$image)
+            {
+                $imageName=Carbon::now()->timestamp.$key.'.'.$image->extension();
+                $image->storeAs('products',$imageName);
+                $imagesName=$imagesName.','.$imageName;
+            }
+            $product->images=$imagesName;
+        }
+
         $product->save();
 
         session()->flash('message','Product added Successfully');

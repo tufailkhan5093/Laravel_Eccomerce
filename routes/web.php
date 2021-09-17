@@ -52,6 +52,7 @@ Route::get('/product-category/{category_slug}',CategoryComponent::class)->name('
 Route::get('/search',SearchComponent::class)->name('product.search');
 Route::get('thankyou/',ThankyouComponent::class)->name('thankyou');
 Route::get('/contact-us',ContactComponent::class)->name('contact');
+Route::get('wishlist',WishlistComponent::class)->name('wishlist');
 
 
 //For USER
@@ -83,7 +84,7 @@ Route::middleware(['auth:sanctum', 'verified','authadmin'])->group(function(){
     Route::get('admin/home-categories',AdminHomeCategoryComponent::class)->name('admin.homecategory');
     Route::get('admin/sale-setting',AdminSaleComponent::class)->name('admin.salesetting');
 
-    Route::get('wishlist',WishlistComponent::class)->name('wishlist');
+    
 
     Route::get('admin/coupons',AdminCouponComponent::class)->name('admin.coupons');
     Route::get('admin/coupons/add',AdminAddCouponComponent::class)->name('admin.addcoupons');

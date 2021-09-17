@@ -45,6 +45,28 @@
                             @else 
                             <img src="{{ asset('assets/images/products') }}/{{$image}}" width="120" />
                             @endif
+
+                        
+                            <input wire:model="newimages" multiple type="file"  class="form-control input-file"><br>
+                                    @if($newimages)
+
+                                    @foreach ($newimages as $newimage)
+                                        @if ($newimage)
+
+                                        <img src="{{$newimage->temporaryUrl()}}" width="120" />
+                                        @endif
+                                        
+                                    @endforeach
+                                
+                                    @else 
+                                    @foreach ($images as $newimage)
+                                    @if ($newimage)
+
+                                    <img src="{{asset('assets/images/products')}}/{{$image}}" width="120" />
+                                    @endif
+                                    
+                                    @endforeach
+                                    @endif
                         <select wire:model="category_id" class="form-control">
                             @foreach($categories as $category)
                             <option value="{{$category->id}}">{{$category->name}}</option>

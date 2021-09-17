@@ -2,7 +2,6 @@
 
     <div class="container">
 
-        <a class="btn btn-warning" href="" wire:click.prevent="msg()">Click me</a>
         @if(Session::has('message'))
         <div class="alert alert-success">
                 <strong>{{Session::get('message')}}</strong>
@@ -29,7 +28,7 @@
                     <div class="product product-style-3 equal-elem ">
                         <div class="product-thumnail">
                             <a href="{{route('product.detail',['slug'=>$item->model->slug])}}" title="{{$item->model->name}}">
-                                <figure><img src="{{ asset('assets/images/products') }}/{{$item->model->image}}" alt="{{$item->model->name}}"></figure>
+                                <figure><img src="{{ asset('assets/images/products') }}/{{$item->model->image}}" alt="{{$item->model->name}}" width="160px"></figure>
                             </a>
                         </div>
                         <div class="product-info">

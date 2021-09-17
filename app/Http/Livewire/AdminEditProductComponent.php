@@ -27,6 +27,9 @@ class AdminEditProductComponent extends Component
     public $new_image;
     public $product_id;
 
+    public $images;
+    public $newimages;
+
 
     public function mount($slug)
     {
@@ -44,6 +47,9 @@ class AdminEditProductComponent extends Component
         $this->featured=$product->featured;
         $this->category_id=$product->id;
         $this->stock_status=$product->stock_status;
+
+        $this->images=explode(',',$product->images);
+        
        
        
     }
@@ -66,13 +72,38 @@ class AdminEditProductComponent extends Component
         $product->stock_status=$this->stock_status;
         $product->quantity=$this->quantity;
         $product->category_id=$this->category_id;
+        
         if($this->new_image)
         {
+            unlink('assets/images/products'.'/'.$product->image);
             $imageName=Carbon::now()->timestamp.'.'.$this->new_image->extension();
             $this->new_image->storeAs('products',$imageName);
             $product->image=$imageName;
         }
-        
+
+        if($this->newimages)
+        {
+            if($product->images)
+            {
+                $images=explode(',',$product->images);
+                foreach($images as $image)
+                {
+                    if($image)
+                    {
+                        unlink('assets/images/products'.'/'.$image);
+                    }  
+                  }
+            }
+
+            $imagesName='';
+            foreach($this->newimages as $key=>$image)
+            {
+                $imageName=Carbon::now()->timestamp.$key.'.'.$image->extension();
+                $image->storeAs('products',$imageName);
+                $imagesName=$imagesName.','.$imageName;
+            }
+            $product->images=$imagesName;
+        }
         $product->save();
 
         session()->flash('message','Product Updated');

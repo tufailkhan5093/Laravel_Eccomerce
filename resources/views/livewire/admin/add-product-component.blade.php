@@ -43,6 +43,15 @@
                             @if($image)
                             <img src="{{$image->temporaryUrl()}}" width="120" />
                             @endif
+                            <label class="form-control">Products Gallery</label>
+
+                            <input wire:model="images" type="file" multiple  class="form-control input-file"><br>
+                            @if($images)
+                                @foreach($images as $img)
+                                <img src="{{$img->temporaryUrl()}}" width="120" />
+                                @endforeach
+                            @endif
+                         
                         <select wire:model="category_id" class="form-control">
                             @foreach($categories as $category)
                             <option value="{{$category->id}}">{{$category->name}}</option>
