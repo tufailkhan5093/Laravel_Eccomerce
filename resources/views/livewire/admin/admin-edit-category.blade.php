@@ -20,8 +20,19 @@
                         @endif
 
                    <form  class="form-group" wire:submit.prevent="updateCategory">
+                       
                        <input type="text" placeholder="Category name" class=" mb-3 form-control" wire:model="name" wire:keyup="generateSlug"><br><br>
+                     
                        <input type="text" placeholder="Slug" class=" mb-3 form-control" wire:model="slug"><br><br>
+
+                       <select class="form-control input-md" wire:model="category_id">
+                        <option value="">None</option>
+                        @foreach ($categories as $cat)
+                        <option value="{{$cat->id}}">{{$cat->name}}</option>
+                            
+                        @endforeach
+                    </select>
+                    <br>
                        <input type="submit" class=" my-3 btn btn-danger" value="Submit">
                    </form>
                 </div>

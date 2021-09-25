@@ -67,8 +67,15 @@
                                     
                                     @endforeach
                                     @endif
-                        <select wire:model="category_id" class="form-control">
+                        <select wire:model="category_id" class="form-control" wire:change="changeSubCategory()">
                             @foreach($categories as $category)
+                            <option value="{{$category->id}}">{{$category->name}}</option>
+                            @endforeach
+                        </select><br>
+
+                        <select wire:model="scategory_id" class="form-control">
+                            <option value="0">Select Category</option>
+                            @foreach($scategories as $category)
                             <option value="{{$category->id}}">{{$category->name}}</option>
                             @endforeach
                         </select><br>

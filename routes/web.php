@@ -48,7 +48,7 @@ Route::get('/cart',CartComponent::class)->name('product.cart');
 Route::get('/shop',ShopComponent::class);
 Route::get('/checkout',CheckoutComponent::class)->name('checkout');
 Route::get('/detail/{slug}',DetailsComponent::class)->name('product.detail');
-Route::get('/product-category/{category_slug}',CategoryComponent::class)->name('product.category');
+Route::get('/product-category/{category_slug}/{scategory_slug?}',CategoryComponent::class)->name('product.category');
 Route::get('/search',SearchComponent::class)->name('product.search');
 Route::get('thankyou/',ThankyouComponent::class)->name('thankyou');
 Route::get('/contact-us',ContactComponent::class)->name('contact');
@@ -72,7 +72,7 @@ Route::middleware(['auth:sanctum', 'verified','authadmin'])->group(function(){
     Route::get('/admin/dashboard',AdminDashboardComponent::class)->name('admin.dashboard');
     Route::get('admin/categories',AdminCategoryComponent::class)->name('admin.categories');
     Route::get('admin/add/categories',AdminAddCategory::class)->name('admin.addcategories');
-    Route::get('admin/edit/category/{category_slug}',AdminEditCategory::class)->name('admin.editcategory');
+    Route::get('admin/edit/category/{category_slug}/{scategory_slug?}',AdminEditCategory::class)->name('admin.editcategory');
     Route::get('/admin/products',AdminProductComponent::class)->name('admin.products');
     Route::get('/admin/products/add',AddProductComponent::class)->name('admin.addproducts');
     Route::get('/admin/products/edit/{slug}',AdminEditProductComponent::class)->name('admin.editproducts');

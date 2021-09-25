@@ -24,6 +24,16 @@
                        @error('name') <p class="text-danger">{{$message}}</p>@enderror
                        <input type="text" placeholder="Slug" class=" mb-3 form-control" wire:model="slug"><br><br>
                        @error('name') <p class="text-danger">{{$message}}</p>@enderror
+
+                       <select class="form-control input-md" wire:model="category_id">
+                           <option value="">None</option>
+                           @foreach ($categories as $cat)
+                           <option value="{{$cat->id}}">{{$cat->name}}</option>
+                               
+                           @endforeach
+                       </select>
+                       <br>
+
                        <input type="submit" class=" my-3 btn btn-danger" value="Submit">
                    </form>
                 </div>

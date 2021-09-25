@@ -128,6 +128,7 @@ class CartComponent extends Component
 
         }
     }
+    
 
 
     public function render()
@@ -143,7 +144,16 @@ class CartComponent extends Component
             {
                 $this->calculateDiscount();
             }
+      }
+   
+
+    if(Auth::check())
+        {
+    
+                Cart::instance('cart')->store(Auth::user()->email);
+         
         }
+        
         
         return view('livewire.cart-component')->layout('layouts.base');
     }

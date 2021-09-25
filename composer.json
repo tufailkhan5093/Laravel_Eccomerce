@@ -6,16 +6,15 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
-        "bumbummen99/shoppingcart": "^4.0",
+        "cartalyst/stripe-laravel": "^13.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "hardevine/shoppingcart": "~2.0",
+        "hardevine/shoppingcart": "^3.0",
         "laravel/framework": "^8.54",
         "laravel/jetstream": "^2.3",
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
-        "livewire/livewire": "^2.5",
-        "cartalyst/stripe-laravel": "^13.0"
+        "livewire/livewire": "^2.5"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
